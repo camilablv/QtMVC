@@ -24,6 +24,9 @@ public:
 private:
     void openDB(QSqlDatabase &db);
     QSqlDatabase database;
+    QSqlTableModel* model;
+    Delegate* delegate;
+
     Ui::MainWindow *ui;
 };
 

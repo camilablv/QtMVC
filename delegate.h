@@ -9,8 +9,6 @@
 
 class Delegate : public QItemDelegate
 {
-    Q_OBJECT
-
 public:
     Delegate(QSqlTableModel* model, QObject* parent = nullptr);
 

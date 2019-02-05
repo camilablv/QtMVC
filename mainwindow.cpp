@@ -6,13 +6,11 @@
 
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), database(QSqlDatabase::addDatabase("QMYSQL")),
+    QMainWindow(parent), database(QSqlDatabase::addDatabase("QMYSQL")), model(new QSqlTableModel(this, database)), delegate(new Delegate(model)),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     openDB(database);
-    QSqlTableModel* model = new QSqlTableModel(this, database);
-    Delegate* delegate = new Delegate(model);
     model->setTable("persons");
     model->select();
     ui->listView->setModel(model);
@@ -22,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete delegate;
+    delete model;
 }
 
 void MainWindow::openDB(QSqlDatabase& db)
